@@ -10,7 +10,10 @@ pipe = DiffusionPipeline.from_pretrained(
     model,
     torch_dtype=torch.float16,
 )
-pipe.enable_model_cpu_offload()
+# pipe.enable_model_cpu_offload()
+pipe.to("cuda")
+pipe.load_lora_weights(
+    prj_path, weight_name="pytorch_lora_weights.safetensors")
 pipe.load_lora_weights(
     prj_path, weight_name="pytorch_lora_weights.safetensors")
 
